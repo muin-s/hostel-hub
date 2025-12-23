@@ -1,109 +1,97 @@
-# 🏠 Hostel Hub – Smart Hostel Management System
+# Hostel Hub – Hostel Management System with NLP & LLM Integration
 
-**Live Demo:** [https://hostel-hub-management-system-yzo8.onrender.com/](https://hostel-hub-management-system-yzo8.onrender.com/)
-**Backend API:** Hosted on Railway
-**Frontend:** React + Vite
-
----
-
-## 📖 Overview
-
-**Hostel Hub** is a complete hostel management platform designed for students, admins, and repair staff. It simplifies day-to-day operations — from issue reporting and notice updates to bus timetables and medical records — through a centralized web dashboard.
-
-The system supports **JWT-based authentication**, **role-specific dashboards**, and **seamless communication** among users.
+A full-stack **Hostel Management System** built using **Flask**, integrating **classical NLP, machine learning, LLM-based intent analysis**, and deployed on **AWS EC2**.  
+The project focuses on automating hostel operations such as **issue categorization**, **student exit management**, and **nearby marketplace discovery** using intelligent text understanding.
 
 ---
 
 ## 🚀 Features
 
-### 👩‍🎓 Student
+### 🔹 Issue Management with NLP
+- Users submit issues in **free-text form**
+- Automatic **issue category prediction** using **TF-IDF + Linear SVM**
+- Basic **sentiment and priority understanding**
+- Enables faster and automated worker assignment
 
-* View notices and announcements
-* Raise and track maintenance issues
-* Access bus timetables and medical services
+### 🔹 Hostel Exit Intent Analysis (LLM-based)
+- Supports:
+  - Regular hostel exits
+  - Long leaves (vacation / extended stay outside hostel)
+- Uses:
+  - **Local Qwen-2.5 model** for intent understanding
+  - Extracts:
+    - Leave type
+    - Expected duration
+    - Return estimation
+    - Risk indicators (late return, unusual patterns)
+- Reduces manual approval overhead
 
-### 🧑‍🔧 Repairer
+### 🔹 Nearby Marketplace Search
+- Marketplace search for items like:
+  - Electronics
+  - Sports equipment
+  - Daily essentials
+- Uses **OpenStreetMap (OSM) data**
+- NLP-based keyword mapping for relevant shop discovery
 
-* View and manage assigned repair tasks
-* Update issue status in real-time
-
-### 🧑‍💼 Admin
-
-* Post and manage notices
-* Assign repairers to reported issues
-* Manage doctors, students, and timetables
-
----
-
-## ⚙️ Tech Stack
-
-**Frontend:**
-
-* React (Vite)
-* React Router
-* Tailwind CSS
-* shadcn/ui components
-
-**Backend:**
-
-* Flask (Python)
-* Flask-JWT-Extended
-* Flask-CORS
-* SQLAlchemy + SQLite
-* Render (for frontend)
-* Railway (for backend)
+### 🔹 Deployment
+- Backend deployed on **AWS EC2**
+- Headless and production-ready setup
+- Designed for further scalability
 
 ---
 
-## Screenshot
+## 🧠 NLP & Machine Learning Pipeline
 
-<img width="1852" height="934" alt="image" src="https://github.com/user-attachments/assets/6b5e95d5-e0b7-4121-be1d-d6c686b8c3ae" />
+### 1️⃣ Text Preprocessing
+- Lowercasing
+- Punctuation removal
+- Stopword removal
+- Lemmatization
 
-<img width="1852" height="934" alt="image" src="https://github.com/user-attachments/assets/091a9724-eebf-477e-838b-7e9d5ef79816" />
+### 2️⃣ Feature Extraction
+- **TF-IDF Vectorization**
+- Converts unstructured text into numerical features
+
+### 3️⃣ Model Used
+- **Linear Support Vector Machine (SVM)**
+- Well-suited for high-dimensional sparse text data
+- Chosen over Naive Bayes due to better class separation
+
+### 4️⃣ Evaluation
+- Train/Test split
+- Accuracy-based evaluation
+- Confusion matrix analysis for misclassification insights
+- Achieved **~85–90% accuracy** on issue categorization
 
 ---
 
-## 🔐 Authentication
-
-* **JWT (JSON Web Token)** is used for secure and stateless authentication.
-* Users are authorized based on their roles (Student / Admin / Repairer).
-
----
-
-## 🧠 Architecture
-
-```
-Frontend (React) → REST API (Flask) → Database (SQLite)
-```
-
-The system follows a clean separation between frontend and backend, communicating via secure API routes.
-
----
-
-## 🧰 Setup Instructions
+## 🏗️ Tech Stack
 
 ### Backend
+- Flask (Python)
+- Flask-JWT (Authentication)
+- SQLAlchemy / PostgreSQL
 
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate  # on Linux/Mac
-# or .\.venv\Scripts\activate on Windows
+### NLP & ML
+- Scikit-learn
+- TF-IDF Vectorizer
+- Linear SVM
+- NLTK (text preprocessing)
 
-pip install -r requirements.txt
-flask db upgrade  # if migrations exist
-python app.py
-```
+### LLM
+- Local **Qwen-2.5** model
+- Basic LLM API calls for intent understanding
 
-### Frontend
+### External APIs
+- OpenStreetMap (Nearby shop search)
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+### Deployment
+- AWS EC2
+- Gunicorn
+- Headless server configuration
 
-Visit:
+---
 
-* **Frontend:** `http://localhost:5173`
-* **Backend API:** `http://localhost:8080`
+## 📂 Project Architecture (High-Level)
+
